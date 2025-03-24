@@ -1,0 +1,72 @@
+id = "ltex-plus"
+name = "LTeX+ Grammar Checker"
+version = "0.0.1"
+description = "A LanguageTool based grammar checker."
+authors = ["tedzards509"]
+license = "MIT"
+schema_version = 1
+repository = "https://github.com/tedzards509/ltex-plus-zed"
+
+[language_servers.ltex-plus]
+name = "ltex-plus"
+languages = [
+    #
+    # == Markup ==
+    #
+    "BibTeX",
+    # "ConTeXt",
+    "LaTeX",
+    "Markdown",
+    # "MDX",
+    "Typst",
+    # "Neorg",
+    "Org",
+    "Plain Text",
+    # "Quarto",
+    # "reStructuredText",
+    # "R Sweave",
+    # "XHTML",
+    "HTML",
+    #
+    # == Programming ==
+    #
+    "Shell Script", # bash
+    "C",
+    "CSharp",       # C#
+    "C++",
+    "Clojure",
+    # "CoffeeScript",
+    "Dart",
+    "Elixir",
+    "Elm",
+    "Erlang",
+    "FSharp",     # F#
+    "Fortran",
+    "Go",
+    "Groovy",
+    "Haskell",
+    "Java",
+    "JavaScript",
+    # "JavaScript React",
+    "Julia",
+    "Kotlin",
+    # "Lisp",
+    "Lua",
+    "MATLAB",
+    "Perl",
+    # "Perl 6",
+    "PHP",
+    "PowerShell",
+    # "Puppet",
+    "Python",
+    "R",
+    "Ruby",
+    "Rust",
+    "Scala",
+    "SQL",
+    "Swift",
+    "TypeScript",
+    # "TypeScript React",
+    "Verilog",
+    # "Visual Basic",
+]

@@ -1,0 +1,13 @@
+[package]
+name = "ltex-plus-zed"
+version = "0.0.1"
+edition = "2021"
+authors = ["tedzards509"]
+description = "Zed extension to use the LTeX+ grammar checker"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.1.0"
