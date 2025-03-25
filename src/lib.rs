@@ -1,12 +1,13 @@
 use std::{fs, path::PathBuf};
-use zed_extension_api::{self as zed, DownloadedFileType, Result};
+use zed_extension_api::{
+    self as zed, serde_json, settings::LspSettings, DownloadedFileType, Result,
+};
 
 const LS_EXECUTABLE_NAME: &str = "ltex-ls-plus";
 const LS_REPO: &str = "ltex-plus/ltex-ls-plus";
 
 struct LTeXPlusExecutable {
     path: PathBuf,
-    // Config json would be nice
 }
 
 struct LTeXPlusExtension {
@@ -79,7 +80,7 @@ impl LTeXPlusExtension {
             .find(|a| a.name == asset_name)
             .ok_or_else(|| format!("Failed to find asset with name {}", asset_name))?;
 
-        let version_dir = format!("ltex-plus-{version}");
+        let version_dir = format!("ltex-ls-plus-{version}");
         let mut binary_path = PathBuf::from(&version_dir).join("bin/ltex-ls-plus");
         if os == zed::Os::Windows {
             binary_path.set_extension("bat");
@@ -94,7 +95,7 @@ impl LTeXPlusExtension {
             let download_result = (|| -> Result<()> {
                 zed::download_file(
                     &asset.download_url,
-                    &version_dir,
+                    "", // When extracted automatically creates a version directory
                     if os == zed::Os::Windows {
                         zed::DownloadedFileType::Zip
                     } else {
@@ -147,9 +148,21 @@ impl zed::Extension for LTeXPlusExtension {
                 .to_str()
                 .ok_or("Invalid binary path")?
                 .to_string(),
-            args: Vec::new(), // Auch für config json
+            args: Vec::new(),
             env: Vec::new(),
         })
+    }
+
+    fn language_server_workspace_configuration(
+        &mut self,
+        _language_server_id: &zed_extension_api::LanguageServerId,
+        worktree: &zed_extension_api::Worktree,
+    ) -> Result<Option<serde_json::Value>> {
+        let settings = LspSettings::for_worktree("ltex", worktree)
+            .ok()
+            .and_then(|lsp_settings| lsp_settings.settings.clone())
+            .unwrap_or_default();
+        Ok(Some(settings))
     }
 }
 
