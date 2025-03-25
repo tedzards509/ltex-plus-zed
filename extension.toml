@@ -7,8 +7,8 @@ license = "MIT"
 schema_version = 1
 repository = "https://github.com/tedzards509/ltex-plus-zed"
 
-[language_servers.ltex-plus]
-name = "ltex-plus"
+[language_servers.ltex-ls-plus]
+name = "ltex-ls-plus"
 languages = [
     #
     # == Markup ==
